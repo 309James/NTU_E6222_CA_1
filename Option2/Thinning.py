@@ -14,11 +14,13 @@ def threshold_LUT(t):
 
 
 if __name__ == '__main__':
-    img = Image.open("Images/img5.bmp")
+    img_name = 'img6'
+    img = Image.open("Images/"+img_name+".bmp")
     img_a = np.array(img)
     h = img.height
     w = img.width
-    LUT_1 = threshold_LUT(180)
+    v = 1
+    LUT_1 = threshold_LUT(v)
     for i in range(h):
         for j in range(w):
             img_a[i, j] = LUT_1[img_a[i, j]]
@@ -52,11 +54,13 @@ if __name__ == '__main__':
                             b = b+1
                     if 2 <= b <= 6:
                         satisfy = satisfy+1
+
                     for k in range(8):
                         if neighbors[k] == 0 and neighbors[k+1] == 1:
                             a = a+1
                     if a == 1:
                         satisfy = satisfy+1
+
                     if neighbors[0] == 0 or neighbors[2] == 0 or neighbors[4] == 0:
                         satisfy = satisfy+1
                     if neighbors[2] == 0 or neighbors[4] == 0 or neighbors[6] == 0:
@@ -115,3 +119,4 @@ if __name__ == '__main__':
                 img_a[i, j] = 0
     img2 = Image.fromarray(np.uint8(img_a))
     img2.show()
+    img2.save(img_name + '_thinning' + '.png', "png")

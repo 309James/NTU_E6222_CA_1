@@ -5,10 +5,10 @@ import h5py
 from option import option as op
 
 dataset_name = "adult"
-
+# data of train
 temp1 = h5py.File("UCI data python/" + dataset_name + "_train_R.mat")
 data1 = np.array(temp1['data1']).T
-
+# data test
 temp2 = h5py.File("UCI data python/" + dataset_name + "_test_R.mat")
 data2 = np.array(temp2['data2']).T
 
@@ -53,6 +53,7 @@ option2 = op()
 option3 = op()
 option4 = op()
 
+# parameter tuning
 for s in range(0, S.size):
 
     for N in range(3, 204, 20):
@@ -93,29 +94,29 @@ for s in range(0, S.size):
             train_accuracy3, test_accuracy3 = RVFL_train_val(trainX_temp, trainY_temp, testX_temp, testY_temp, option3)
             train_accuracy4, test_accuracy4 = RVFL_train_val(trainX_temp, trainY_temp, testX_temp, testY_temp, option4)
 
-            if test_accuracy1 > MAX_acc[
-                0]:  # parameter tuning: we prefer the parameter which lead to better accuracy on the test data
+            if test_accuracy1 > MAX_acc[0]:
+                # parameter tuning: we prefer the parameter which lead to better accuracy on the test data
                 MAX_acc[0] = test_accuracy1
                 Best_N[0] = N
                 Best_C[0] = C
                 Best_S[0] = Scale
 
-            if test_accuracy2 > MAX_acc[
-                1]:  # parameter tuning: we prefer the parameter which lead to better accuracy on the test data
+            if test_accuracy2 > MAX_acc[1]:
+                # parameter tuning: we prefer the parameter which lead to better accuracy on the test data
                 MAX_acc[1] = test_accuracy2
                 Best_N[1] = N
                 Best_C[1] = C
                 Best_S[1] = Scale
 
-            if test_accuracy3 > MAX_acc[
-                2]:  # parameter tuning: we prefer the parameter which lead to better accuracy on the test data
+            if test_accuracy3 > MAX_acc[2]:
+                # parameter tuning: we prefer the parameter which lead to better accuracy on the test data
                 MAX_acc[2] = test_accuracy3
                 Best_N[2] = N
                 Best_C[2] = C
                 Best_S[2] = Scale
 
-            if test_accuracy4 > MAX_acc[
-                3]:  # parameter tuning: we prefer the parameter which lead to better accuracy on the test data
+            if test_accuracy4 > MAX_acc[3]:
+                # parameter tuning: we prefer the parameter which lead to better accuracy on the test data
                 MAX_acc[3] = test_accuracy4
                 Best_N[3] = N
                 Best_C[3] = C

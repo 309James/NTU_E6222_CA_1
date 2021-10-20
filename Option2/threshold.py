@@ -1,6 +1,7 @@
 import numpy as np
 from PIL import Image
 
+# Look up Table
 def threshold_LUT(t):
     LUT = []
     for i in range(t):
@@ -11,18 +12,24 @@ def threshold_LUT(t):
 
 
 if __name__ == '__main__':
-    img = Image.open("Images/img6.bmp")
+    # load the image file
+    img_name = 'img1'
+    img = Image.open("Images/"+img_name+".bmp")
+    # transform image into grey level matrix
     img_a = np.array(img)
     h = img.height
     w = img.width
-    LUT_1 = threshold_LUT(140)
+    v = 180
+    LUT_1 = threshold_LUT(v)
+    # threshold process
     for i in range(h):
         for j in range(w):
             img_a[i, j] = LUT_1[img_a[i, j]]
 
     img2 = Image.fromarray(np.uint8(img_a))
     img2.show()
-    # img2.save('2.png',"png")
+    # output
+    img2.save(img_name+'_'+str(v)+'.png', "png")
 
 
 

@@ -79,8 +79,9 @@ def RVFL_train_val(trainX, trainY, testX, testY, option):
             elif option.Scalemode == 2:
 
                 [H, k, b] = Scale_feature_separately(H, Saturating_threshold, option.Scale)
+        # H = 1 / (1 + np.exp(-H))
+        H = .5 * (1 + np.tanh(.5 * H))
 
-        H = 1 / (1 + np.exp(-H))
 
 
     elif option.ActivationFunction.lower() == 'sin' or option.ActivationFunction.lower() == 'sine':
@@ -194,7 +195,8 @@ def RVFL_train_val(trainX, trainY, testX, testY, option):
                 bt = np.matlib.repmat(b, nSamtest, 1)
                 H_test = H_test * kt + bt
 
-        H_test = 1 / (1 + np.exp(-H_test))
+        # H_test = 1.0 / (1 + np.exp(-H_test))
+        H_test = .5 * (1 + np.tanh(.5 * H_test))
 
     elif option.ActivationFunction.lower() == 'sin' or option.ActivationFunction.lower() == 'sine':
 
